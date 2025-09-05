@@ -61,16 +61,16 @@ pipeline {
             steps {
                 script {
                     kubeconfig(credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443') {
-                        withCredentials([string(credentialsId: 'argocd-admin-password', variable: 'ARGOCD_PASSWORD')]) {
+                        withCredentials([string(credentialsId: 'ARGOCD_PASSWORD', variable: 'argocd-admin-password')]) {
                             sh '''
                                 argocd login --insecure 192.168.0.60:8081 --username admin --password $ARGOCD_PASSWORD
                                 echo "Syncing Application..."
                                 argocd app sync argocdjenkins
                             '''
+                            }
+                        }
+                    }
                 }
             }
         }
-    }
-    }
-    }
 }
