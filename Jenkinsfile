@@ -66,7 +66,7 @@ pipeline {
                                 argocd login --insecure 192.168.0.60:8081 --username "\$ARGOCD_USERNAME" --password "\$ARGOCD_PASSWORD"
                                 echo "Syncing Application..."
                                 argocd app sync argocdjenkins
-                            """
+                        }   """
                     }
                 }
             }
