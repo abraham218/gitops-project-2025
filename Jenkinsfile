@@ -3,6 +3,9 @@ pipeline {
 	tools {
 		nodejs 'NodeJS'
 	}
+	environment {
+		DOCKER_HUB_REPO = 'abraham218/gitopsapp'
+	}
 
     stages {
         stage('Checkout') {
@@ -13,7 +16,14 @@ pipeline {
         }
 		stage('Install Nodejs'){
 			steps{
+				echo "installing npm dependencies"
 				sh 'npm install'
+			}
+		}
+		stage('Build Docker Image') {
+			steps{
+				echo "Buikding Docker Image"
+				docker.image("${DOCKER_HUB_REPO}:latest")
 			}
 		}
     }
