@@ -24,7 +24,7 @@ pipeline {
 			steps{
 				script{
 					echo "Building Docker Image"
-					docker.image("${DOCKER_HUB_REPO}:latest")
+					def app = docker.build("${DOCKER_HUB_REPO}:latest")
 				}
 			}
 		}
