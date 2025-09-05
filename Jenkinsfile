@@ -23,7 +23,7 @@ pipeline {
 		stage('Build Docker Image') {
 			steps{
 				script{
-					echo "Buikding Docker Image"
+					echo "Building Docker Image"
 					docker.image("${DOCKER_HUB_REPO}:latest")
 				}
 			}
