@@ -62,7 +62,7 @@ pipeline {
 				script {
 					kubeconfig(credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443') {
 						sh '''
-						argocd login 192.168.0.60:80 --username admin --password $ARGOCD_PASSWORD --insecure
+						argocd login 192.168.0.60:80 --username admin --password $ARGOCD_PASSWORD --insecure --grpc-web
 						echo "Syncing Application..."
 						argocd app sync argocdjenkins
 						'''
