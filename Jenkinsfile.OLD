@@ -58,19 +58,17 @@ pipeline {
 			}
 		}
 		stage('Apply Kubernetes Manifests & Sync App with ArgoCD') {
-            steps {
-                script {
-                    kubeconfig(credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443') {
-                        withCredentials([string(credentialsId: 'argocd-admin-password', variable: 'ARGOCD_PASSWORD')]) {
-                            sh '''
-                                argocd login --insecure 192.168.0.60:8081 --username admin --password $ARGOCD_PASSWORD
-                                echo "Syncing Application..."
-                                argocd app sync argocdjenkins
-                            '''
-                }
-            }
-        }
-    }
-    }
+			steps {
+				script {
+					kubeconfig(credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443') {
+						sh '''
+						argocd login --insecure 192.168.0.60:8081 --username admin --password 6APJLVyWlqmkTfgahuF071jd9GeXisZB
+						echo "Syncing Application..."
+						argocd app sync argocdjenkins
+						'''
+					}
+				}
+			}
+		}
     }
 }
