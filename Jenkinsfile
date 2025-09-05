@@ -5,6 +5,7 @@ pipeline {
 	}
 	environment {
 		DOCKER_HUB_REPO = 'abraham218/gitopsapp'
+		DOCKER_HUB_CREDENTIALS_ID = 'DOCKER_HUB_CREDS'
 	}
 
     stages {
@@ -32,6 +33,16 @@ pipeline {
 			steps {
 				//sh 'trivy image --severity HIGH,CRITICAL --no-progress --format table -o trivy-scan-report.txt ${DOCKER_HUB_REPO}:latest'
 				sh 'trivy image --severity HIGH,CRITICAL --skip-update --no-progress --format table -o trivy-scan-report.txt ${DOCKER_HUB_REPO}:latest'
+			}
+		}
+		stage('DockerHub Push') {
+			steps{
+				script {
+					docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_HUB_CREDENTIALS_ID') {
+						def app = docker.build("${DOCKER_HUB_REPO}:latest")
+						app.push()
+					}
+				}
 			}
 		}
     }
