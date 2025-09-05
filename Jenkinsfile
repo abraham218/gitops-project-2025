@@ -38,7 +38,7 @@ pipeline {
 		stage('DockerHub Push') {
 			steps{
 				script {
-					docker.withRegistry('https://registry.hub.docker.com', '${DOCKER_HUB_CREDENTIALS_ID}') {
+					docker.withRegistry('https://registry.hub.docker.com', "${DOCKER_HUB_CREDENTIALS_ID}") {
 						def app = docker.build("${DOCKER_HUB_REPO}:latest")
 						app.push()
 					}
