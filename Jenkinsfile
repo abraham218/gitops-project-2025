@@ -4,7 +4,7 @@ pipeline {
 		nodejs 'NodeJS'
 	}
 	environment {
-		DOCKER_HUB_REPO = 'abraham218/gitopsapp'
+		DOCKER_HUB_REPO = 'abraham218/nodejsapp'
 		DOCKER_HUB_CREDENTIALS_ID = 'DOCKER_HUB_CREDS'
 	}
 
