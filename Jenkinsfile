@@ -6,6 +6,7 @@ pipeline {
     environment {
         DOCKER_HUB_REPO = 'abraham218/nodejsapp'
         DOCKER_HUB_CREDENTIALS_ID = 'DOCKER_HUB_CREDS'
+        ARGOCD_USERNAME = 'admin'
     }
 
     stages {
@@ -75,7 +76,7 @@ pipeline {
             steps {
                 script {
                     kubeconfig(credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443') {
-                        withCredentials([usernamePassword(credentialsId: 'argocd-admin-credentials', usernameVariable: 'ARGOCD_USERNAME', passwordVariable: 'ARGOCD_PASSWORD')]) {
+                        withCredentials([string(credentialsId: 'ARGOCD_PASSWORD', variable: 'argocd-admin-password')]) {
                             sh """
                             argocd login 192.168.0.60:8081 \
                               --insecure \
